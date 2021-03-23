@@ -7,7 +7,7 @@ import java.util.*;
 // Note -> The online judge can't force you to write the function recursively but that is what the spirit of question is.
 // Write recursive and not iterative logic. The purpose of the question is to aid learning recursion and not test you
 
-public class GetSubString {
+public class GetSubSequence {
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
         System.out.print("Enter the string: ");
