@@ -14,6 +14,7 @@ public class PrintStairPaths {
         int n = scn.nextInt();
 
         printStairPaths(n, "");
+        scn.close();
     }
 
     public static void printStairPaths(int n, String path) {
