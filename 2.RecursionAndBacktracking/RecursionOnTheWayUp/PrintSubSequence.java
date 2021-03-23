@@ -13,6 +13,7 @@ public class PrintSubSequence {
         String str = scn.nextLine();
 
         printSS(str, "");
+        scn.close();
     }
 
     public static void printSS(String str, String ans) {
