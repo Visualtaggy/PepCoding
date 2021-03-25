@@ -11,7 +11,9 @@ public class MazePathJumps {
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
 
+        System.out.print("Enter size of the rows");
         int n = scn.nextInt();
+        System.out.print("Enter size of the coll");
         int m = scn.nextInt();
 
         printMazePaths(1, 1, n, m, "");
