@@ -14,6 +14,7 @@
 // Note1 -> Please check the sample input and output for details
 // Note2 -> If all four moves are available make moves in the order 't', 'l',
 // 'd' and 'r'
+
 import java.util.*;
 
 public class FloodFill {
@@ -25,8 +26,44 @@ public class FloodFill {
         System.out.println("Enter the number of colls: ");
         int m = scn.nextInt();
 
+        int[][] arr = new int[n][m];
 
-        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                System.out.print("Enter the elements: ");
+                arr[i][j] = scn.nextInt();
+            }
+        }
+
+        boolean[][] visitTracker = new boolean[n][m];
+
+        printFloodFill(0, 0, n, m, arr, "", visitTracker);
         scn.close();
+    }
+
+    public static void printFloodFill(int sr, int sc, int dr, int dc, int[][] arr, String answer,
+            boolean[][] visitTrack) {
+
+        if (sr < 0 || sc < 0 || sr >= dr || sc >= dc || arr[sr][sc] == 1 || visitTrack[sr][sc] == true) {
+            return;
+        }
+
+        if (sr == dr - 1 && sc == dc - 1) {
+            System.out.println(answer);
+            return;
+        }
+
+        visitTrack[sr][sc] = true;
+        // Top
+        printFloodFill(sr - 1, sc, dr, dc, arr, answer + "t", visitTrack);
+        // Left
+        printFloodFill(sr, sc - 1, dr, dc, arr, answer + "l", visitTrack);
+        // Down
+        printFloodFill(sr + 1, sc, dr, dc, arr, answer + "d", visitTrack);
+        // Right
+        printFloodFill(sr, sc + 1, dr, dc, arr, answer + "r", visitTrack);
+
+        visitTrack[sr][sc] = false;
+
     }
 }
