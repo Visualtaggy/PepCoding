@@ -13,20 +13,53 @@ public class NQueenMatrix {
         Scanner scn = new Scanner(System.in);
 
         int n = scn.nextInt();
-        int m = scn.nextInt();
 
-        int[][] arr = new int[n][m];
+        int[][] arr = new int[n][n];
 
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr.length; j++) {
-                arr[i][j] = scn.nextInt();
-            }
-        }
         printNQueens(arr, "", 0);
         scn.close();
     }
 
     public static void printNQueens(int[][] chess, String qsf, int row) {
+        if (row == chess.length) {
+            System.out.println(qsf = ".");
+            return;
+        }
 
+        for (int col = 0; col < chess.length; col++) {
+            if (checkSafety(chess, row, col) == true) {
+                // placing queen
+                chess[row][col] = 1;
+                // recursive call
+                printNQueens(chess, qsf + row + "-" + col + ", ", row + 1);
+                // removing queen
+                chess[row][col] = 0;
+            }
+        }
+    }
+
+    public static boolean checkSafety(int[][] board, int row, int col) {
+        // row - 1 coz on row the queen is sitting
+        // CHECKING VERTICALLY UPP
+        for (int i = row - 1, j = col; i >= 0; i--) {
+            if (board[i][j] == 1) {
+                return false;
+            }
+        }
+
+        // LEFT D
+        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+            if (board[i][j] == 1) {
+                return false;
+            }
+        }
+        // Right D
+        for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+            if (board[i][j] == 1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
