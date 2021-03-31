@@ -10,6 +10,15 @@ import java.util.*;
 
 public class BalancedBracketsOfficial {
     public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+
+        String str = scn.nextLine();
+
+        Stack<Character> st = new Stack<>();
+
+        // Assuming "(a+b)"
+        for (int i = 0; i < str.length(); i++) {
+        }
 
     }
 }
