@@ -13,8 +13,70 @@ import java.io.*;
 //      ending with a line-break.
 // 3. Input and Output are managed for you.
 // 4. You are required to change the body of push function to accept the element even when the data array is completely full. In that case, you are required to reallocate the data array (to twice it's size). You should not print "Stack overflow" ever.
-
 public class DynamicStack {
+    public static class CustomStack {
+        int[] data;
+        int tos;
+
+        public CustomStack(int cap) {
+            data = new int[cap];
+            tos = -1;
+        }
+
+        int size() {
+            return tos + 1;
+        }
+
+        void display() {
+            for (int i = tos; i >= 0; i--) {
+                System.out.print(data[i] + " ");
+            }
+            System.out.println();
+        }
+
+        // change the code of this function according to question
+        void push(int val) {
+            if (tos == data.length - 1) {
+                // Increasing size of stack by x2
+                int[] newData = new int[data.length * 2];
+
+                // Copying contents
+                for (int index = 0; index < data.length; index++) {
+                    newData[index] = data[index];
+                }
+
+                // V.IMP to change the point
+                data = newData;
+
+                tos++;
+                data[tos] = val;
+
+            } else {
+                tos++;
+                data[tos] = val;
+            }
+        }
+
+        int pop() {
+            if (tos == -1) {
+                System.out.println("Stack underflow");
+                return -1;
+            } else {
+                int val = data[tos];
+                tos--;
+                return val;
+            }
+        }
+
+        int top() {
+            if (tos == -1) {
+                System.out.println("Stack underflow");
+                return -1;
+            } else {
+                return data[tos];
+            }
+        }
+    }
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
