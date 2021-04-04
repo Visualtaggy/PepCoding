@@ -7,6 +7,7 @@
 // Note -> There can be only one celebrity. Think why?
 
 import java.io.*;
+import java.util.*;
 
 public class CelebrityProblem {
 
@@ -30,6 +31,36 @@ public class CelebrityProblem {
     public static void findCelebrity(int[][] arr) {
         // if a celebrity is there print it's index (not position), if there is not then
         // print "none"
+        Stack<Integer> st = new Stack<>();
+        for (int i = 0; i < arr.length; i++) {
+            st.push(i);
+        }
+
+        while (st.size() >= 2) {
+            int a = st.pop();
+            int b = st.pop();
+
+            if (arr[a][b] == 1) {
+                // this means a knows b -> which means a is not a celeb
+                st.push(b);
+            } else {
+                // this means [a][b] -> 0 which means b is not a celeb
+                st.push(a);
+            }
+
+        }
+
+        int maybeCeleb = st.pop();
+        for (int i = 0; i < arr.length; i++) {
+            if (i != maybeCeleb) {
+                if (arr[maybeCeleb][i] == 1 || arr[i][maybeCeleb] == 0) {
+                    System.out.println("none");
+                    return;
+                }
+            }
+        }
+
+        System.out.println(maybeCeleb);
     }
 
 }
