@@ -17,6 +17,18 @@ public class AddLastInLinkedList {
 
         void addLast(int val) {
             // Write your code here
+            Node node = new Node();
+            node.data = val;
+            node.next = null;
+
+            if (size == 0) {
+                head = tail = node;
+            } else {
+                tail.next = node;
+                tail = node;
+            }
+
+            size++;
         }
     }
 
