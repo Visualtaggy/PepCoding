@@ -2,7 +2,6 @@
 // 1. You are given an infix expression.
 // 2. You are required to convert it to postfix and print it.
 // 3. You are required to convert it to prefix and print it.
-import java.io.*;
 import java.util.*;
 
 public class InfixConversion {
@@ -16,8 +15,9 @@ public class InfixConversion {
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String exp = br.readLine();
+        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Scanner scn = new Scanner(System.in);
+        String exp = scn.nextLine();
 
         // code
 
