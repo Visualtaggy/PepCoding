@@ -18,7 +18,7 @@ public class InfixConversion {
         // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Scanner scn = new Scanner(System.in);
         String exp = scn.nextLine();
-
+        scn.close();
         // code
 
         Stack<String> prefix = new Stack<>();

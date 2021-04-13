@@ -29,7 +29,7 @@ public class InfixEvaluation {
         // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Scanner scn = new Scanner(System.in);
         String exp = scn.nextLine();
-
+        scn.close();
         // code
         Stack<Integer> vs = new Stack<>();
         Stack<Character> os = new Stack<>();
