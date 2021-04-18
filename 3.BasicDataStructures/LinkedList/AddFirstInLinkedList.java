@@ -13,7 +13,6 @@
 // 4. Input and Output is managed for you.
 
 import java.io.*;
-import java.util.*;
 
 public class AddFirstInLinkedList {
     public static class Node {
