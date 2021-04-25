@@ -16,7 +16,6 @@
 // 3. You are required to complete the body of reverseDI function. The function should be an iterative function and should reverse the contents of linked list by changing the "data" property of nodes.
 // 4. Input and Output is managed for you.
 import java.io.*;
-import java.util.*;
 
 public class ReverseALinkedListData {
     public static class Node {
