@@ -1,25 +1,24 @@
-// 1. You are required to complete the code of our LLToStackAdapter class. 
+// 1. You are required to complete the code of our LLToQueueAdapter class. 
 // 2. As data members, you've a linkedlist available in the class.
 // 3. Here is the list of functions that you are supposed to complete
-//     3.1. push -> Should accept new data in LIFO manner
-//     3.2. pop -> Should remove and return data in LIFO manner. If not 
-//      available, print "Stack underflow" and return -1.
-//     3.3. top -> Should return data in LIFO manner. If not available, print 
-//     "Stack underflow" and return -1.
-//     3.4. size -> Should return the number of elements available in the 
-//     stack
+//      3.1. add -> Should accept new data in FIFO manner
+//      3.2. remove -> Should remove and return data in FIFO manner. If not available, 
+//      print "Queue underflow" and return -1.
+//      3.3. peek -> Should return data in FIFO manner. If not available, print "Queue 
+//      underflow" and return -1.
+//      3.4. size -> Should return the number of elements available in the queue
 // 4. Input and Output is managed for you.
 
-// Note -> The intention is to use linked list functions to achieve the purpose of a stack. All the functions should work in constant time.
+// Note -> The intention is to use linked list functions to achieve the purpose of a queue. All the functions should work in constant time.
 import java.io.*;
 import java.util.*;
 
-public class LinkedListToStackAdapter {
+public class LinkedListToQueueAdapter {
 
-    public static class LLToStackAdapter {
+    public static class LLToQueueAdapter {
         LinkedList<Integer> list;
 
-        public LLToStackAdapter() {
+        public LLToQueueAdapter() {
             list = new LinkedList<>();
         }
 
@@ -28,55 +27,53 @@ public class LinkedListToStackAdapter {
             return list.size();
         }
 
-        void push(int val) {
+        void add(int val) {
             // write your code here
-            list.addFirst(val);
+            list.addLast(val);
         }
 
-        int pop() {
+        int remove() {
             // write your code here
             if (size() == 0) {
-                System.out.println("stack underflow");
+                System.out.println("Queue underflow");
                 return -1;
             } else {
-                return list.removeFirst(); 
+                return list.removeFirst();
             }
-
         }
 
-        int top() {
+        int peek() {
             // write your code here
             if (size() == 0) {
-                System.out.println("stack underflow");
+                System.out.println("Queue underflow");
                 return -1;
             } else {
                 return list.getFirst();
             }
-
         }
     }
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        LLToStackAdapter st = new LLToStackAdapter();
+        LLToQueueAdapter qu = new LLToQueueAdapter();
 
         String str = br.readLine();
         while (str.equals("quit") == false) {
-            if (str.startsWith("push")) {
+            if (str.startsWith("add")) {
                 int val = Integer.parseInt(str.split(" ")[1]);
-                st.push(val);
-            } else if (str.startsWith("pop")) {
-                int val = st.pop();
+                qu.add(val);
+            } else if (str.startsWith("remove")) {
+                int val = qu.remove();
                 if (val != -1) {
                     System.out.println(val);
                 }
-            } else if (str.startsWith("top")) {
-                int val = st.top();
+            } else if (str.startsWith("peek")) {
+                int val = qu.peek();
                 if (val != -1) {
                     System.out.println(val);
                 }
             } else if (str.startsWith("size")) {
-                System.out.println(st.size());
+                System.out.println(qu.size());
             }
             str = br.readLine();
         }
