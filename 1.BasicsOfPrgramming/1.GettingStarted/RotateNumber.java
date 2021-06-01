@@ -14,6 +14,7 @@ public class RotateNumber {
         // n = 12340056
         // k = 3
         // r = 05612340
+        
 
         Scanner scn = new Scanner(System.in);
 
