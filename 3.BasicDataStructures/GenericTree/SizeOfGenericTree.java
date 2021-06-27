@@ -50,6 +50,14 @@ public class SizeOfGenericTree {
 
     public static int size(Node node) {
         // write your code here
+        int total = 0;
+
+        for (Node child : node.children) {
+            int child_size = size(child);
+            total += child_size;
+        }
+        total += 1;
+        return total;
     }
 
     public static void main(String[] args) throws Exception {
