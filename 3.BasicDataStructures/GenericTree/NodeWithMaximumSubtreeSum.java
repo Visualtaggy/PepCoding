@@ -48,6 +48,26 @@ public class NodeWithMaximumSubtreeSum {
         return root;
     }
 
+    static int max_value = Integer.MIN_VALUE;
+    static int max_node = 0;
+
+    public static int magic(Node node){
+        int total = 0;
+
+        for(Node child : node.children){
+             int childNodes = magic(child);
+             total += childNodes;
+        }
+        total += node.data;
+
+        if(total > max_value){
+            max_value = total;
+            max_node = node.data;
+        }
+        
+        return total;
+    }
+    
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
