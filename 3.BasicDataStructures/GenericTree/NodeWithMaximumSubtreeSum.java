@@ -64,7 +64,7 @@ public class NodeWithMaximumSubtreeSum {
             max_value = total;
             max_node = node.data;
         }
-        
+
         return total;
     }
     
@@ -79,6 +79,8 @@ public class NodeWithMaximumSubtreeSum {
 
         Node root = construct(arr);
         // write your code here
+        magic(root);
+        System.out.println(max_node + "@" + max_value); 
     }
 
 }
