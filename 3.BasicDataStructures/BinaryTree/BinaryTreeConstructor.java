@@ -64,6 +64,7 @@ public class BinaryTreeConstructor {
                 }
                 top.state++;
             } else if (top.state == 2) {
+                index++;
                 if (arr[index] != null) {
                     Node right = new Node(arr[index], null, null);
                     top.node.right = right;
@@ -74,6 +75,7 @@ public class BinaryTreeConstructor {
                 }
                 top.state++;
             } else {
+                index++;
                 st.pop();
             }
         }
