@@ -5,6 +5,17 @@ import java.util.*;
 
 public class TraversalsInABinaryTree {
 
+    public static void treversal(Node node) {
+        if (node == null) {
+            return;
+        }
+        System.out.println(node.data + " in preorder");
+        treversal(node.left);
+        System.out.println(node.data + " in inorder");
+        treversal(node.right);
+        System.out.println(node.data + " in postorder");
+    }
+
     public static class Node {
         int data;
         Node left;
@@ -86,6 +97,7 @@ public class TraversalsInABinaryTree {
         }
 
         // display(root);
+        treversal(root);
     }
 
 }
