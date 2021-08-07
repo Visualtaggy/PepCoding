@@ -75,7 +75,6 @@ public class BinaryTreeConstructor {
                 }
                 top.state++;
             } else {
-                index++;
                 st.pop();
             }
         }

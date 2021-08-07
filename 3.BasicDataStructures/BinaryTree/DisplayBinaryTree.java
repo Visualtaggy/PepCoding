@@ -27,6 +27,32 @@ public class DisplayBinaryTree {
         }
     }
 
+    // Code
+
+    public static void display(Node root) {
+
+        // Imporant base case for no nodes in the binary tree
+        if (root == null) {
+            return;
+        }
+
+        String answer = "";
+        // checking for what's on left side of the root node
+        answer += root.left == null ? "." : root.left.data + "";
+        // checking for the node
+        answer += "<- " + root.data + " ->";
+        // checking for what's on the right side of the root node
+        answer += root.right == null ? "." : root.right.data + "";
+
+        // Printing the output
+        System.out.println(answer);
+
+        // Recursively calling other children
+        display(root.left);
+        display(root.right);
+
+    }
+
     public static void main(String[] args) {
         Integer[] arr = { 50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, 87, null,
                 null };
@@ -45,15 +71,16 @@ public class DisplayBinaryTree {
                 idx++;
                 if (arr[idx] != null) {
                     Node left = new Node(arr[idx], null, null);
-                    Pair lp = new Pair(left, 1);
-
                     top.node.left = left;
+
+                    Pair lp = new Pair(left, 1);
                     st.push(lp);
 
                 } else {
                     top.node.left = null;
                 }
 
+                top.state++;
             } else if (top.state == 2) {
                 idx++;
                 if (arr[idx] != null) {
@@ -67,10 +94,12 @@ public class DisplayBinaryTree {
                 else {
                     top.node.right = null;
                 }
+                top.state++;
             } else {
-                idx++;
                 st.pop();
             }
         }
+
+        display(root);
     }
 }
