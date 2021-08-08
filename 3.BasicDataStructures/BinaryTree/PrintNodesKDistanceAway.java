@@ -84,7 +84,7 @@ public class PrintNodesKDistanceAway {
         display(node.right);
     }
 
-    static ArrayList<Integer> path = new ArrayList<>();
+    static ArrayList<Node> path = new ArrayList<>();
 
     public static boolean findPath(Node node, int data) {
 
@@ -93,37 +93,42 @@ public class PrintNodesKDistanceAway {
         }
 
         if (node.data == data) {
-            path.add(node.data);
+            path.add(node);
             return true;
         }
 
         boolean left = findPath(node.left, data);
         if (left) {
-            path.add(node.data);
+            path.add(node);
             return true;
         }
         boolean right = findPath(node.right, data);
         if (right) {
-            path.add(node.data);
+            path.add(node);
             return true;
         }
         return false;
     }
 
-    public static void kLevelDown(Node node, int k) {
-        if (node == null || k < 0) {
+    public static void kLevelDown(Node node, int k, Node blocker) {
+        if (node == null || k < 0 || node == blocker) {
             return;
         }
 
         if (k == 0) {
             System.out.println(node.data);
         }
-        kLevelDown(node.left, k - 1);
-        kLevelDown(node.right, k - 1);
+        kLevelDown(node.left, k - 1, blocker);
+        kLevelDown(node.right, k - 1, blocker);
     }
 
     public static void printKNodesFar(Node node, int data, int k) {
         // write your code here
+        boolean value = findPath(node, data);
+        for (int i = 0; i < path.size(); i++) {
+            kLevelDown(path.get(i), k - i, i == 0 ? null : path.get(i - 1));
+        }
+
     }
 
     public static void main(String[] args) throws Exception {
