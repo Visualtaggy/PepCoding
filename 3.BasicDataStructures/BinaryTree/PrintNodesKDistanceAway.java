@@ -124,7 +124,7 @@ public class PrintNodesKDistanceAway {
 
     public static void printKNodesFar(Node node, int data, int k) {
         // write your code here
-        boolean value = findPath(node, data);
+        findPath(node, data);
         for (int i = 0; i < path.size(); i++) {
             kLevelDown(path.get(i), k - i, i == 0 ? null : path.get(i - 1));
         }
