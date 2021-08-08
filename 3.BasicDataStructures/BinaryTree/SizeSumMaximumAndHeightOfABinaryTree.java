@@ -116,10 +116,29 @@ public class SizeSumMaximumAndHeightOfABinaryTree {
 
     public static int max(Node node) {
         // write your code here
+        if (node == null) {
+            // returning identity
+            return Integer.MIN_VALUE;
+        }
+
+        int max_left = max(node.left);
+        int max_right = max(node.right);
+        int master_max = Math.max(node.data, Math.max(max_left, max_right));
+
+        // returning the max value
+        return master_max;
     }
 
     public static int height(Node node) {
         // write your code here
+        if (node == null) {
+            return -1;
+        }
+
+        int node_left = height(node.left);
+        int node_right = height(node.right);
+        int total = Math.max(node_left, node_right) + 1;
+        return total;
     }
 
     public static void main(String[] args) throws Exception {
