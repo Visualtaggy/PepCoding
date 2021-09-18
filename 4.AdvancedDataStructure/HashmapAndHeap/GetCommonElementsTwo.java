@@ -10,10 +10,63 @@
 
 // Note -> Don't assume the arrays to be sorted. Check out the question video.
 
+import java.io.*;
+import java.util.*;
 
+public class GetCommonElementsTwo{
 
-public class GetCommonElementsTwo {
-    public static void main(String[] args) {
-        
+public static void main(String[] args) throws Exception {
+    // write your code here
+    
+    Scanner scn = new Scanner(System.in);
+    
+    
+    // [Taking input]
+    int n = scn.nextInt();
+    int[] arr1 = new int[n];
+    
+    for(int i = 0; i < arr1.length; i++){
+        arr1[i] = scn.nextInt();
     }
+    
+    int m = scn.nextInt();
+    int[] arr2 = new int[m];
+    
+    for(int i = 0; i < arr2.length; i++){
+        arr2[i] = scn.nextInt();
+    }
+    
+    // [Creating Hashmap]
+    
+    HashMap<Integer,Integer> hm = new HashMap<>();
+
+    // [ Parsing arr1 and making HashMap]    
+    for(int val : arr1){
+        if(hm.containsKey(val)){
+            int old_f = hm.get(val);
+            int new_f = old_f + 1;
+            
+            hm.put(val,new_f);
+            
+        }
+        else{
+            hm.put(val,1);
+        }
+    }
+    
+    
+    for(int val : arr2 ){
+        if(hm.containsKey(val) && hm.get(val) > 0){
+            int old_f = hm.get(val);
+            int new_f = old_f - 1;
+
+            hm.put(val,new_f);
+            System.out.println(val);
+        }   
+    }
+    
+    
+    
+ }
+
 }
