@@ -12,6 +12,7 @@ public class HeapsIntroductionAndUsage {
             pq.add(val);
         }
 
+        // Using heap sort
         while (pq.size() > 0) {
             System.out.println(pq.peek());
             pq.remove();
