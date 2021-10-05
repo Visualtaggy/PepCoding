@@ -41,6 +41,34 @@ public class HasPath {
         int dest = Integer.parseInt(br.readLine());
 
         // write your code here
+        boolean[] visited = new boolean[vtces];
+        boolean path = hasPath(graph, src, dest, visited);
+        System.out.println(path);
+
+    }
+
+    public static boolean hasPath(ArrayList<Edge>[] graph, int src, int dest, boolean[] visited) {
+
+        if (src == dest) {
+            return true;
+        }
+
+        visited[src] = true;
+
+        for (Edge edge : graph[src]) {
+            // Travel only if not visited in the past
+            if (visited[edge.nbr] == false) {
+
+                boolean contains_path = hasPath(graph, edge.nbr, dest, visited);
+
+                if (contains_path) {
+                    return true;
+                }
+
+            }
+        }
+
+        return false;
     }
 
 }
