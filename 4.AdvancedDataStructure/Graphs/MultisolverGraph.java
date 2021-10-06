@@ -1,3 +1,4 @@
+
 // 1. You are given a graph, a src vertex and a destination vertex.
 // 2. You are give a number named "criteria" and a number "k".
 // 3. You are required to find and print the values of 
@@ -6,12 +7,6 @@
 // 3.3 Just Larger path (than criteria in terms of weight) and it's weight separated by an "@"
 // 3.4 Just smaller path (than criteria in terms of weight) and it's weight separated by an "@"
 // 3.5 Kth largest path and it's weight separated by an "@"
-
-
-
-
-
-
 import java.io.*;
 import java.util.*;
 
@@ -32,12 +27,12 @@ public class MultisolverGraph {
       int wsf;
       String psf;
 
-      Pair(int wsf, String psf){
+      Pair(int wsf, String psf) {
          this.wsf = wsf;
          this.psf = psf;
       }
 
-      public int compareTo(Pair o){
+      public int compareTo(Pair o) {
          return this.wsf - o.wsf;
       }
    }
@@ -69,15 +64,13 @@ public class MultisolverGraph {
 
       boolean[] visited = new boolean[vtces];
       multisolver(graph, src, dest, visited, criteria, k, src + "", 0);
-      
+
       System.out.println("Smallest Path = " + spath + "@" + spathwt);
       System.out.println("Largest Path = " + lpath + "@" + lpathwt);
       System.out.println("Just Larger Path than " + criteria + " = " + cpath + "@" + cpathwt);
       System.out.println("Just Smaller Path than " + criteria + " = " + fpath + "@" + fpathwt);
       System.out.println(k + "th largest path = " + pq.peek().psf + "@" + pq.peek().wsf);
    }
-
-
 
    static String spath;
    static Integer spathwt = Integer.MAX_VALUE;
@@ -87,20 +80,54 @@ public class MultisolverGraph {
    static Integer cpathwt = Integer.MAX_VALUE;
    static String fpath;
    static Integer fpathwt = Integer.MIN_VALUE;
-    public static void multisolver(ArrayList<Edge>[] graph, int src, int dest, boolean[] visited, int criteria, int k, String psf, int wsf) {
-        
-        if(src == dest){
-            return;
-        }
-        
-        visited[src] = true;
-        for(Edge e : graph[src]){
-            if(visited[src] == false){
-                multisolver(graph,e.nbr,dest,visited,criteria,k,psf + e.nbr, wsf + e.wt);
+
+   static PriorityQueue<Pair> pq = new PriorityQueue<>();
+
+   public static void multisolver(ArrayList<Edge>[] graph, int src, int dest, boolean[] visited, int criteria, int k,
+         String psf, int wsf) {
+
+      if (src == dest) {
+         if (wsf < spathwt) {
+            spathwt = wsf;
+            spath = psf;
+         }
+
+         if (wsf > lpathwt) {
+            lpathwt = wsf;
+            lpath = psf;
+         }
+
+         if (wsf > criteria && wsf < cpathwt) {
+            cpathwt = wsf;
+            cpath = psf;
+         }
+
+         if (wsf < criteria && wsf > fpathwt) {
+            fpathwt = wsf;
+            fpath = psf;
+         }
+
+         if (pq.size() < k) {
+            pq.add(new Pair(wsf, psf));
+         } else {
+            if (wsf > pq.peek().wsf) {
+               pq.remove();
+               pq.add(new Pair(wsf, psf));
             }
-        }
-        
-        visited[src] = false;
-        
+
+         }
+
+         return;
+      }
+
+      visited[src] = true;
+      for (Edge e : graph[src]) {
+         if (visited[e.nbr] == false) {
+            multisolver(graph, e.nbr, dest, visited, criteria, k, psf + e.nbr, wsf + e.wt);
+         }
+      }
+
+      visited[src] = false;
+
    }
 }
