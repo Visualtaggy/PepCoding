@@ -1,3 +1,4 @@
+
 /**
  * GoogleInterviewInternSWE
  * 
@@ -24,9 +25,45 @@
  * no such element print -1.
  * 
  */
+import java.util.*;
+
 public class GoogleInterviewInternSWE {
 
     public static void main(String[] args) {
 
+        Scanner s = new Scanner(System.in);
+        int t = s.nextInt();
+        while (t-- != 0) {
+            int n = s.nextInt();
+            int arr[] = new int[n];
+            int min = Integer.MAX_VALUE;
+            int max = Integer.MIN_VALUE;
+            int k;
+            for (int i = 0; i < n; i++) {
+                arr[i] = s.nextInt();
+                if (arr[i] > max)
+                    max = arr[i];
+                if (arr[i] < min)
+                    min = arr[i];
+            }
+            k = s.nextInt();
+            int is_dev = 1;
+            for (int i = 0; i < n; i++) {
+                if (arr[i] % min != 0) {
+                    is_dev = 0; // easily reach to [1,2,3 .... max]
+                    break;
+                }
+            }
+            if (is_dev == 0) {
+                n = max - (k - 1);
+            } else {
+                n = max - min * (k - 1);
+            }
+            if (n <= 0)
+                System.out.println("-1");
+            else
+                System.out.println(n);
+
+        }
     }
 }
