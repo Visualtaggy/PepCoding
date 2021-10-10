@@ -38,5 +38,29 @@ public class IsGraphConnected {
         }
 
         // write your code here
+        boolean[] visited = new boolean[vtces];
+        ArrayList<ArrayList<Integer>> comps = new ArrayList<>();
+
+        // going though all the vertices
+        for (int v = 0; v < vtces; v++) {
+            if (!visited[v]) {
+                ArrayList<Integer> answer = new ArrayList<>();
+                travel(graph, v, answer, visited);
+                comps.add(answer);
+            }
+        }
+
+        System.out.println(comps.size() == 1);
+    }
+
+    public static void travel(ArrayList<Edge>[] graph, int src, ArrayList<Integer> answer, boolean[] visited) {
+        visited[src] = true;
+
+        for(Edge e: graph[src]){
+            if( !visited[e.nbr] ){
+                travel(graph, e.nbr, answer, visited);
+            }
+        }
+        
     }
 }
