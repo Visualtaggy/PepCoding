@@ -42,6 +42,41 @@ public class HamiltonianPathAndCycle {
         int src = Integer.parseInt(br.readLine());
 
         // write all your codes here
+        HashSet<Integer> visited = new HashSet<>();
+        travel(graph, src, visited, src + "", src);
+    }
+
+    public static void travel(ArrayList<Edge>[] graph, int src, HashSet<Integer> visited, String psf, int og_src) {
+
+        if (visited.size() == graph.length - 1) {
+            System.out.print(psf);
+
+            boolean flag = false;
+
+            for (Edge e : graph[src]) {
+                if (e.nbr == og_src) {
+                    flag = true;
+                    break;
+                }
+            }
+
+            if (flag) {
+                System.out.println("*");
+            } else {
+                System.out.println(".");
+            }
+
+            return;
+        }
+
+        visited.add(src);
+
+        for (Edge e : graph[src]) {
+            if (!visited.contains(e.nbr)) {
+                travel(graph, e.nbr, visited, psf + e.nbr, og_src);
+            }
+        }
+        visited.remove(src);
     }
 
 }
