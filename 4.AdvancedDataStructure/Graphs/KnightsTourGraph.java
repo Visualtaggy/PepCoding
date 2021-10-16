@@ -17,13 +17,39 @@ import java.io.*;
 import java.util.*;
 
 public class KnightsTourGraph {
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+        int row = scn.nextInt();
+        int col = scn.nextInt();
 
-    public static void main(String[] args) throws Exception {
+        int arr[][] = new int[n][n];
 
+        printKnightsTour(arr, row, col, 1);
     }
 
-    public static void printKnightsTour(int[][] chess, int r, int c, int upcomingMove) {
+    public static void printKnightsTour(int[][] chess, int row, int col, int move) {
 
+        if (row < 0 || col < 0 || row >= chess.length || col >= chess.length || chess[row][col] > 0) {
+            return;
+
+        } else if (move == chess.length * chess.length) {
+            chess[row][col] = move;
+            displayBoard(chess);
+            chess[row][col] = 0;
+            return;
+        }
+
+        chess[row][col] = move;
+        printKnightsTour(chess, row - 2, col + 1, move + 1);
+        printKnightsTour(chess, row - 1, col + 2, move + 1);
+        printKnightsTour(chess, row + 1, col + 2, move + 1);
+        printKnightsTour(chess, row + 2, col + 1, move + 1);
+        printKnightsTour(chess, row + 2, col - 1, move + 1);
+        printKnightsTour(chess, row + 1, col - 2, move + 1);
+        printKnightsTour(chess, row - 1, col - 2, move + 1);
+        printKnightsTour(chess, row - 2, col - 1, move + 1);
+        chess[row][col] = 0;
     }
 
     public static void displayBoard(int[][] chess) {
