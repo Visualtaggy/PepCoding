@@ -12,6 +12,16 @@ public class BreadthFirstTraversal {
         }
     }
 
+    public static class Pair {
+        int v;
+        String psf;
+
+        Pair(int v, String psf) {
+            this.v = v;
+            this.psf = psf;
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -33,5 +43,27 @@ public class BreadthFirstTraversal {
         int src = Integer.parseInt(br.readLine());
 
         // write your code here
+        ArrayDeque<Pair> custom_queue = new ArrayDeque<>();
+        custom_queue.add(new Pair(src, src + ""));
+
+        boolean[] visited = new boolean[vtces];
+
+        while (custom_queue.size() > 0) {
+            Pair removed_element = custom_queue.removeFirst();
+
+            if (visited[removed_element.v]) {
+                continue;
+            }
+
+            visited[removed_element.v] = true;
+            System.out.println(removed_element.v + "@" + removed_element.psf);
+
+            for (Edge e : graph[removed_element.v]) {
+                if (!visited[e.nbr]) {
+                    custom_queue.add(new Pair(e.nbr, removed_element.psf + e.nbr));
+                }
+            }
+        }
+
     }
 }
